@@ -26,7 +26,8 @@ class MathJax_Parser {
 
     static function RemoveMathTags(&$parser, &$text) 
     {
-        $text = preg_replace('|:\s*<math>(.*?)</math>|s', '\\[$1\\]', $text);
+        $text = preg_replace('|::\s*<math>(.*?)</math>|s', '\\[$1\\]', $text);
+        #$text = preg_replace('|:\s*<math>(.*?)</math>|s', '\\[$1\\]', $text);
         $text = preg_replace('|<math>(.*?)</math>|s',     '\\($1\\)', $text);
 
         return true;
@@ -38,14 +39,19 @@ class MathJax_Parser {
         global $wgMathJaxProcConf;
         global $wgMathJaxLocConf;
 
+        global $wgMathJaxLocConfUse;
+
         if(self::$mark_n == 0) return true; // there was no math detected
 
         $tempScript = "<script type='text/javascript' src='" . $wgMathJaxJS . "?config=" . $wgMathJaxProcConf;
         if (!is_null($wgMathJaxLocConf)) $tempScript = $tempScript . "," . $wgMathJaxLocConf;
         $tempScript = $tempScript . "'> </script>";
 
+        if(($wgMathJaxLocConfUse==true)){
+            global $IP;
+	    $out->addScript( "<script type='text/x-mathjax-config'>" . file_get_contents("$IP/extensions/MathJax/mwMathJaxConfig.js") . "</script>\n" );	
+        }
         $out->addScript( $tempScript );
-
         return true;
     }
 

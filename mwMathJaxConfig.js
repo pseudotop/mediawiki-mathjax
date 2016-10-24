@@ -1,6 +1,6 @@
 //<![CDATA[
 MathJax.Hub.Config({
-                   showMathMenu: false,
+                   //showMathMenu: false,
                    extensions: ["fp.js"],
                    tex2jax: {
                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -161,5 +161,5 @@ MathJax.Hub.Config({
                    }
                    });
 
-MathJax.Ajax.loadComplete("_SUBSTITUTE YOUR URL___/mathjax/config/local/mwMathJaxConfig.js");
+//MathJax.Ajax.loadComplete("_SUBSTITUTE YOUR URL___/mathjax/config/local/mwMathJaxConfig.js");
 //]]>
